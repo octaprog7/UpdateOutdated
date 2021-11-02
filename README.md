@@ -1,2 +1,2 @@
 # UpdateOutdated
-automatic update all outdated python package in current python environment.
+automatic update all outdated (pip list -o) python package in current python environment.

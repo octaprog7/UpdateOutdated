@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """update all outdated packages"""
 
-import sys
 import subprocess as sbp
+import sys
 
 # win32
 pip_pkg_name = "pip"

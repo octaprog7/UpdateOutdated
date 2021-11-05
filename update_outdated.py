@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""update all outdated packages"""
+"""update all outdated packages in current environment"""
 
 import subprocess as sbp
 import sys

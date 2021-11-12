@@ -3,6 +3,7 @@
 
 import subprocess as sbp
 import sys
+from typing import List
 
 # win32
 pip_pkg_name = "pip"
@@ -13,7 +14,7 @@ if "linux" == sys.platform:
     python_exe_file = "python3"
 
 
-def exist_in_list_of_dict(package_name: str, source: list, key_name="name") -> int:
+def exist_in_list_of_dict(package_name: str, source: List[dict], key_name="name") -> int:
     """
         Возвращает индекс содержимого списка словарей, если содержимое словаря
         по ключу key_name содержит package_name
@@ -25,7 +26,7 @@ def exist_in_list_of_dict(package_name: str, source: list, key_name="name") -> i
     return -1
 
 
-def get_outdated_packages() -> list:
+def get_outdated_packages() -> List[dict]:
     """
     return list of dict outdated packages
     """
@@ -51,7 +52,7 @@ cnt, mx = 0, len(pkgs)
 
 while pkgs:
     pkg = pkgs.pop()
-    pkg_name = pkg['name']
+    pkg_name = pkg["name"]
     s = f"{pip_pkg_name} install --upgrade {pkg_name}"
     # updating
     completed_process = update_package(s)  # !!!

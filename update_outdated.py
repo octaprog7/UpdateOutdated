@@ -5,7 +5,7 @@ import subprocess as sbp
 import sys
 from typing import List
 
-# win32
+# default values
 pip_pkg_name = "pip"
 python_exe_file = "python"
 
@@ -22,7 +22,7 @@ def exist_in_list_of_dict(package_name: str, source: List[dict], key_name="name"
     for itm in source:
         if package_name == itm[key_name]:
             return source.index(itm)
-
+    # not found (-1)
     return -1
 
 

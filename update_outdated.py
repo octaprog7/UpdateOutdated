@@ -38,25 +38,26 @@ def update_package(cmd: str) -> sbp.CompletedProcess:
     return sbp.run(cmd, shell=True)  # !!!
 
 
-# get list with all outdated packages
-pkgs = get_outdated_packages()
-print(f"{len(pkgs)} outdated packages awaiting...")
+if "__main__" == __name__:
+    # get list with all outdated packages
+    pkgs = get_outdated_packages()
+    print(f"{len(pkgs)} outdated packages awaiting...")
 
-index = exist_in_list_of_dict(pip_pkg_name, pkgs)
-if index >= 0:
-    pkgs.pop(index)  # строку с pip на первое место в списке для обновления в первую очередь
-    s = f"{python_exe_file} -m {pip_pkg_name} install --upgrade {pip_pkg_name}"
-    update_package(s)
+    index = exist_in_list_of_dict(pip_pkg_name, pkgs)
+    if index >= 0:
+        pkgs.pop(index)  # строку с pip на первое место в списке для обновления в первую очередь
+        s = f"{python_exe_file} -m {pip_pkg_name} install --upgrade {pip_pkg_name}"
+        update_package(s)
 
-cnt, mx = 0, len(pkgs)
+    cnt, mx = 0, len(pkgs)
 
-while pkgs:
-    pkg = pkgs.pop()
-    pkg_name = pkg["name"]
-    s = f"{pip_pkg_name} install --upgrade {pkg_name}"
-    # updating
-    completed_process = update_package(s)  # !!!
+    while pkgs:
+        pkg = pkgs.pop()
+        pkg_name = pkg["name"]
+        s = f"{pip_pkg_name} install --upgrade {pkg_name}"
+        # updating
+        completed_process = update_package(s)  # !!!
 
-    if 0 == completed_process.returncode:
-        cnt += 1
-        print(f"{pkg_name} package updated. Total {int(100 * cnt / mx)} % updated.")
+        if 0 == completed_process.returncode:
+            cnt += 1
+            print(f"{pkg_name} package updated. Total {int(100 * cnt / mx)} % updated.")
